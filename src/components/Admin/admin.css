@@ -1,0 +1,9 @@
+.label-entrar {
+    border: 1px solid red;
+}
+
+.products-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}

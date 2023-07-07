@@ -1,0 +1,55 @@
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import Header from '../components/Header/Header';
+import HeaderAdmin from '../components/Header/HeaderAdmin';
+import ProductsList from '../components/Order_List/ProductsList';
+import { BeerContext } from '../context/BeerContext';
+
+const Products = () => {
+  const { cart } = useContext(BeerContext);
+  const navigateTo = useNavigate();
+
+  const [localCart, setLocalCart] = useState(() => {
+    const localValue = JSON.parse(localStorage.getItem('cart'));
+    if (!localValue === undefined || !localValue === null) {
+      return localValue;
+    }
+    return ({ 0: { product: { price: 0 }, quantity: 0 } });
+  });
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('cart'))) {
+      setLocalCart(JSON.parse(localStorage.getItem('cart')));
+    }
+  }, [cart]);
+
+  const value = Object.values(localCart).reduce((t, { quantity, product }) => {
+    if (!Number.isNaN(parseFloat(product.price))) {
+      return t + quantity * parseFloat(product.price);
+    }
+    return 0;
+  }, 0);
+
+  const accPrice = parseFloat(value).toFixed(2).toString().replace('.', ',');
+  const admin = JSON.parse(localStorage.getItem('role'));
+  return (
+    <div>
+      {admin === 'administrator' ? <HeaderAdmin /> : <Header />}
+      <h1>Página produtos</h1>
+      <ProductsList />
+      <button
+        onClick={ () => navigateTo('/checkout') }
+        type="button"
+        disabled={ !value > 0 }
+        data-testid="checkout-bottom-btn"
+      >
+        {`Ver Carrinho R$ ${accPrice}`}
+      </button>
+      <p data-testid="checkout-bottom-btn-value">
+        {`R$ ${accPrice}`}
+      </p>
+
+    </div>);
+};
+
+export default Products;

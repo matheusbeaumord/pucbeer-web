@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { deleteProduct } from '../../services/Api/products';
 
 
@@ -11,7 +11,7 @@ const ProductsList = ({ products, handleEdit, setFetchProducts }) => {
   return (
     <div className="products-list">
       {products.map((product) => (
-        <div className="product-item">
+        <div className="product-item" key={product.id}>
           <img src={product.urlImage} alt={product.name} width="100"/>
           <h3>{product.name}</h3>
           <p>Preço: R${product.price}</p>

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import { useState, } from 'react';
 import { addProduct, editProduct } from '../../services/Api/products'
 import './admin.css'
 

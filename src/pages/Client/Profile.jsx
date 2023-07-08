@@ -1,4 +1,3 @@
-import React from 'react';
 import ClientProfileForm from '../../components/Client/ClientProfileForm';
 
 function ClientProfile() {

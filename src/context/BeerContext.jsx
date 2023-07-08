@@ -22,7 +22,7 @@ const BeerProvider = ({ children }) => {
 };
 
 BeerProvider.propTypes = {
-  children: PropTypes.objectOf().isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export { BeerContext, BeerProvider as Provider };

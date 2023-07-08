@@ -15,26 +15,28 @@ import AdminProfile from './pages/Admin/Profile';
 import AdminOrders from './pages/Admin/AdminOrders';
 import AdminDetailOrder from './pages/Admin/OrdersDetail';
 import AdminProducts from './pages/Admin/AdminProducts';
+import {Provider} from './context/BeerContext';
 
 function App() {
   return (
-    <Router>
-    <Routes>
-  
-      <Route exact path='/' element={<Login/>} />
-      <Route exact path='/login' element={<Login/>} />
-      <Route exact path='/register' element={<Register/>} />
-      <Route exact path='/admin/orders' element={<AdminOrders/>} />
-      <Route exact path='/admin/produtos' element={<AdminProducts/>} />
-      <Route exact path='/admin/profile' element={<AdminProfile/>} />
-      <Route exact path='/products' element={<Products/>} />
-      <Route exact path='/orders' element={<Orders/>} />
-      <Route exact path='/orders/:numeroDoPedido' element={<OrdersDetail/>} />
-      <Route exact path='/profile' element={<ClientProfile/>} />
-      <Route exact path='/checkout' element={<Checkout/>} />
-      <Route exact path='/admin/orders/:id' element={<AdminDetailOrder/>} />
-    </Routes>
+    <Provider>
+      <Router>
+        <Routes>
+          <Route exact path='/' element={<Login/>} />
+          <Route exact path='/login' element={<Login/>} />
+          <Route exact path='/register' element={<Register/>} />
+          <Route exact path='/admin/orders' element={<AdminOrders/>} />
+          <Route exact path='/admin/produtos' element={<AdminProducts/>} />
+          <Route exact path='/admin/profile' element={<AdminProfile/>} />
+          <Route exact path='/products' element={<Products/>} />
+          <Route exact path='/orders' element={<Orders/>} />
+          <Route exact path='/orders/:numeroDoPedido' element={<OrdersDetail/>} />
+          <Route exact path='/profile' element={<ClientProfile/>} />
+          <Route exact path='/checkout' element={<Checkout/>} />
+          <Route exact path='/admin/orders/:id' element={<AdminDetailOrder/>} />
+        </Routes>
     </Router>
+    </Provider>
   )
 }
 

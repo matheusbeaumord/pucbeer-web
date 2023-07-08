@@ -31,7 +31,7 @@ const LoginForm = () => {
 
   const validateLogin = () => {
     const passwordLength = 6;
-    const nameLength = 12;
+    const nameLength = 3;
     const regexNameValidation = /^[a-z ,.'-]+$/i;
 
     return (

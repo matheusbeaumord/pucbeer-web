@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from '../../components/Header/Header';
 import OrdersList from '../../components/Order_List/OrdersList';
 

@@ -1,0 +1,81 @@
+
+.navbar {
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    left: 0px;
+}
+
+/* .linksHamburguer {
+  margin: 20px;
+  text-decoration: none;
+  color: white;
+  border: solid 2px white;
+  } */
+
+/* .header {
+    align-items: center;
+    background-color:black;
+    color:white;
+    display: fixed;
+    display: flex;
+    justify-content: space-between;
+    max-height: 50px;
+    top:0;
+    width: 100%;
+    margin-top: -35px;
+  } */
+
+  /* .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000000;
+    color: #FFF;
+    height: 50px;
+    padding: 1em;
+    margin-top: -35px;
+  } */
+  
+  .side-menu-container {
+    align-items: center;
+    display: flex;
+    background-color: black;
+    color: white;
+    flex-direction: column;
+    height: 500px;
+    justify-content: space-around;
+    width: 25%;
+  }
+  
+  .hameburgerButton {
+    background-color: black;
+    color: white;
+    border: 0px;
+  }
+  
+  
+  .itensHamburguer {
+    background-color: black;
+    margin: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    font-size: 30px;
+  }
+  
+  /* .linksHamburguer {
+  margin: 20px;
+  text-decoration: none;
+  color: white;
+  }
+  
+  .buttonLogOut {
+    background-color: black;
+    font-size: 30px;
+    
+  } */

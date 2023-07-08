@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Hamburger from 'hamburger-react';
 import { Link } from 'react-router-dom';
+import "./HeaderAdmin.css"
 
 const Header = () => {
   const [sideBar, setSideBar] = useState(false);
@@ -10,8 +11,8 @@ const Header = () => {
   };
 
   return (
-    <div>
-      <div className="header">
+    <div className='cover'>
+      <div className="navbar">
         <button
           type="submit"
           onClick={ () => setSideBar(!sideBar) }

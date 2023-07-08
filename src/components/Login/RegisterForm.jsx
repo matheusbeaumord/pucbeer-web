@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 // import { Link } from 'react-router-dom';
 import { registerUser } from '../../services/Api/user';
 import LoginAuth from '../../services/Auth/Login';
+import '../Login/RegisterForm.css'
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -42,57 +43,75 @@ const LoginForm = () => {
   };
 
   return (
-    <form>
-      <label htmlFor="name">
-        Nome
-        <input
+<div className="container">
+  <div className="screen">
+    <div className="screen__content">
+      <form className='login'>
+      <i className="login__icon">CADASTRO</i>
+        <div className='login__field'>
+          <input
+          placeholder='Nome'
+          className="login__input"
           id="name"
           data-testid="signup-name"
           type="text"
           value={ name }
           onChange={ ({ target: { value } }) => setName(value) }
-        />
-      </label>
-      <label htmlFor="email">
-        Email
-        <input
+          />
+        </div>
+        <div className='login__field'>
+          <input
+          placeholder='E-mail'
+          className="login__input"
           id="email"
           data-testid="signup-email"
           type="email"
           value={ email }
           onChange={ ({ target: { value } }) => setEmail(value) }
-        />
-      </label>
-      <label htmlFor="password">
-        Senha
-        <input
+          />
+        </div>
+        <div className='login__field'>
+          <input
+          placeholder='Senha'
+          className="login__input"
           id="password"
           data-testid="signup-password"
           type="password"
           value={ password }
           onChange={ ({ target: { value } }) => setPassword(value) }
-        />
-      </label>
-      <label htmlFor="checkbox">
-        Quero vender
-        <input
+          />
+        </div>
+        <div className='login__fieldVend'>
+          Quer vender ?
+          <input
+          className="login__input"
           id="checkbox"
           name="querVender"
           data-testid="signup-seller"
           type="checkbox"
           checked={ seller }
           onClick={ () => setSeller(!seller) }
-        />
-      </label>
-      <button
-        data-testid="signup-btn"
-        type="submit"
-        disabled={ !validateLogin() }
-        onClick={ (e) => cadastrar(e) }
-      >
-        Cadastrar
-      </button>
-      {showError && <p>Já existe um usuário com esse e-mail.</p>}
-    </form>);
+          />
+        </div>
+        <button
+          className='button login__submit'
+          data-testid="signup-btn"
+          type="submit"
+          disabled={ !validateLogin() }
+          onClick={ (e) => cadastrar(e) }
+        >
+        <span className="button__text">Cadastrar</span>
+        </button>
+        {showError && <p>Já existe um usuário com esse e-mail.</p>}
+      </form>
+    </div>
+    <div className="screen__background">
+			<span className="screen__background__shape screen__background__shape4"></span>
+			<span className="screen__background__shape screen__background__shape3"></span>		
+			<span className="screen__background__shape screen__background__shape2"></span>
+			<span className="screen__background__shape screen__background__shape1"></span>
+		</div>
+  </div>
+</div>);
 };
 export default LoginForm;

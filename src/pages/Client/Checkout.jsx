@@ -94,19 +94,18 @@ const Checkout = () => {
           {`Total: R$ ${accPrice(finalValue)}`}
         </Typography>
       </div>
-      <div className='adress'>
+      <div className='adress-content'>
         <TextField
           label="Endereço"
           type="text"
           size='small'
+          className='adress'
           value={street}
           onChange={(e) => setStreet(e.target.value)}
           data-testid="checkout-street-input"
         />
-      </div>
-      <div className='adress'>
         <TextField
-          label="Número da residência"
+          label="Número"
           type="text"
           size='small'
           value={houseNumber}

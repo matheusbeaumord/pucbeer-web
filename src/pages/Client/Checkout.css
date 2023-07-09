@@ -13,7 +13,11 @@
         font-weight: bold;
     }
 
+    .adress-content {
+        display: flex;
+        width: 90%;
+    }
     .adress {
-        /* width: 100%; */
+        width: 100%;
     }
 }

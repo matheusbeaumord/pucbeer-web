@@ -5,9 +5,7 @@ const BeerContext = createContext();
 
 const BeerProvider = ({ children }) => {
   const [login, setLogin] = useState(false);
-  const [cart, setCart] = useState({
-    0: { product: { value: 0 }, quantity: 0 },
-  });
+  const [cart, setCart] = useState({});
 
   const context = {
     cart,

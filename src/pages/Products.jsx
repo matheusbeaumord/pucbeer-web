@@ -1,29 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import Header from '../components/Header/Header';
 import HeaderAdmin from '../components/Header/HeaderAdmin';
 import ProductsList from '../components/Order_List/ProductsList';
 import { BeerContext } from '../context/BeerContext';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import CartList from '../components/Order_List/CartList'
 
 const Products = () => {
   const { cart } = useContext(BeerContext);
   const navigateTo = useNavigate();
 
-  const [localCart, setLocalCart] = useState(() => {
-    const localValue = JSON.parse(localStorage.getItem('cart'));
-    if (!localValue === undefined || !localValue === null) {
-      return localValue;
-    }
-    return ({ 0: { product: { price: 0 }, quantity: 0 } });
-  });
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem('cart'))) {
-      setLocalCart(JSON.parse(localStorage.getItem('cart')));
-    }
-  }, [cart]);
-
-  const value = Object.values(localCart).reduce((t, { quantity, product }) => {
+  const value = Object.values(cart).reduce((t, { quantity, product }) => {
     if (!Number.isNaN(parseFloat(product.price))) {
       return t + quantity * parseFloat(product.price);
     }
@@ -35,21 +24,27 @@ const Products = () => {
   return (
     <div>
       {admin === 'administrator' ? <HeaderAdmin /> : <Header />}
-      <h1>Página produtos</h1>
-      <ProductsList />
-      <button
-        onClick={ () => navigateTo('/checkout') }
-        type="button"
-        disabled={ !value > 0 }
-        data-testid="checkout-bottom-btn"
-      >
-        {`Ver Carrinho R$ ${accPrice}`}
-      </button>
-      <p data-testid="checkout-bottom-btn-value">
-        {`R$ ${accPrice}`}
-      </p>
-
-    </div>);
+      <Typography variant="h1">Produtos</Typography>
+      <div style={{ display: 'flex' }}>
+        <div style={{ flex: '1' }}>
+          <ProductsList cart={cart} />
+        </div>
+        <div>
+          <CartList cart={cart}/>
+          <Button
+            onClick={() => navigateTo('/checkout')}
+            variant="contained"
+            disabled={!value > 0}
+            fullWidth
+            color="inherit"
+            style={{marginTop: '15%'}}
+          >
+            {`Ver Carrinho R$ ${accPrice}`}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Products;

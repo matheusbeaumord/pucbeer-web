@@ -7,6 +7,7 @@
 	font-family: Raleway, sans-serif;
 }
 
+
 body {
 	background: linear-gradient(90deg, #F7DC28, #6B5F11);
 }
@@ -102,7 +103,7 @@ body {
 	padding: 10px;
 	padding-left: 24px;
 	font-weight: 700;
-	width: 75%;
+	width: 90%;
 	transition: 0.2s;
     color: black;
 }
@@ -154,5 +155,20 @@ body {
     position: relative;
     top:-40px;
     font-size: 20px;
+	font-family: monospace;
+    font-weight: 700,
+}
+
+.icon_enter {
+	margin-left: 150px;
+}
+
+.lnkCad {
+	color: white;
+    font-family: Raleway, sans-serif;
+    text-decoration: solid;
+    border: 5px solid rgb(42, 42, 42);
+    background-color: rgb(42, 42, 42);
+    border-radius: 10px;
 }
 

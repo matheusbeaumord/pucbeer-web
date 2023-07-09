@@ -2,7 +2,11 @@ import { useState } from 'react';
 import Validator from 'email-validator';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginAuth from '../../services/Auth/Login';
+import SportsBarIcon from '@mui/icons-material/SportsBar';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import KeyIcon from '@mui/icons-material/Key';
 import '../Login/LoginForm.css'
+import LoginIcon from '@mui/icons-material/Login';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -19,12 +23,15 @@ const LoginForm = () => {
   // }
 
   return (
+<body>    
 <div className="container">
 	<div className="screen">
 		<div className="screen__content">
 			<form className="login">
-      <i className="login__icon">PUCBeer</i>
+      <SportsBarIcon className='login__icon'/>
+      <i className="login__icon">TeleGoró</i>
 				<div className="login__field">
+        <AccountCircleIcon/>
 					<input
            type="email"
            value={ email }
@@ -33,6 +40,7 @@ const LoginForm = () => {
            onChange={ ({ target: { value } }) => setEmail(value) }/>
 				</div>
 				<div className="login__field">
+        <KeyIcon/>
 					<input 
            type="password"
            value={ password }
@@ -48,6 +56,7 @@ const LoginForm = () => {
           disabled={ !validateLogin() }
           onClick={ (e) => LoginAuth(e, email, password, navigateTo) }>
 					<span className="button__text">Login</span>
+          <LoginIcon className='icon_enter'/>
 				</button>		
 			</form>
       <Link className='lnkCad' to="/register" data-testid="no-account-btn">Ainda não tenho conta</Link>	
@@ -60,6 +69,7 @@ const LoginForm = () => {
 		</div>		
 	</div>
 </div>
+</body>
 );
 };
 

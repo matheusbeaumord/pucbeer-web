@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import Validator from 'email-validator';
 import { useNavigate } from 'react-router';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { registerUser } from '../../services/Api/user';
 import LoginAuth from '../../services/Auth/Login';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import '../Login/RegisterForm.css'
 
 const LoginForm = () => {
@@ -84,7 +85,7 @@ const LoginForm = () => {
         <div className='login__fieldVend'>
           Quer vender ?
           <input
-          className="login__input"
+          className="login__radio"
           id="checkbox"
           name="querVender"
           data-testid="signup-seller"
@@ -103,6 +104,9 @@ const LoginForm = () => {
         <span className="button__text">Cadastrar</span>
         </button>
         {showError && <p>Já existe um usuário com esse e-mail.</p>}
+      <Link className='icon__back' to="/login" data-testid="no-account-btn">
+        <ArrowBackIcon/>
+      </Link>
       </form>
     </div>
     <div className="screen__background">

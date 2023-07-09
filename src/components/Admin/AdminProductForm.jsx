@@ -1,25 +1,31 @@
 /* eslint-disable react/prop-types */
 import { useState, } from 'react';
 import { addProduct, editProduct } from '../../services/Api/products'
-import './admin.css'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import './admin.css';
 
-
-
-const AdminProductForm = ({ isEditing,  handleEdit, editingProduct, setFetchProducts}) => {
+const AdminProductForm = ({
+  isEditing,
+  handleEdit,
+  editingProduct,
+  setFetchProducts,
+}) => {
   const handleAddProduct = async (product) => {
-    // Aqui você pode fazer a chamada para adicionar o produto no backend
-    await addProduct(product).then(() => setFetchProducts('idle'))
+    await addProduct(product).then(() => setFetchProducts('idle'));
   };
 
   const handleEditProduct = async (product) => {
-    await editProduct(editingProduct.id, product).then(() => setFetchProducts('idle'));
+    await editProduct(editingProduct.id, product).then(() =>
+      setFetchProducts('idle')
+    );
   };
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [urlImage, setUrlImage] = useState(null);
 
-   const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // Verificar se os campos estão preenchidos
     if ((!name || !price || !urlImage) && !isEditing) {
@@ -41,46 +47,68 @@ const AdminProductForm = ({ isEditing,  handleEdit, editingProduct, setFetchProd
     setUrlImage('');
     handleEdit(false);
   };
-  
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' , width: '50%', justifyContent: 'center', padding: '2%' }}>
+      <h2>Adicionar Novo Produto</h2>
 
-    <label htmlFor="name">Nome:</label>
-    <input
-      type="text"
-      id="name"
-      placeholder={isEditing && editingProduct.name}
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-    />
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '5%'}} >
+        <TextField
+          id="name"
+          label="Nome"
+          placeholder={isEditing && editingProduct.name}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          size='small'
+        />
 
-    <label htmlFor="price">Preço:</label>
-    <input
-      type="price"
-      id="price"
-      placeholder={isEditing && editingProduct.price}
-      value={price}
-      onChange={(e) => setPrice(e.target.value)}
-    />
+        <TextField
+          id="price"
+          label="Preço"
+          placeholder={isEditing && editingProduct.price}
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          size='small'
 
-    <label htmlFor="image">Imagem:</label>
-    <input
-      type="text"
-      id="image"
-      placeholder={isEditing && editingProduct.urlImage}
-      value={urlImage}
-      onChange={(e) => setUrlImage(e.target.value)}
-    />
-    <button type="submit">
-      {isEditing ? 'Editar Produto' : 'Adicionar Produto'}
-    </button>
-    {
-      isEditing && (
-        <button type="button" onClick={() => handleEdit(false, '')}>
-            Cancelar
-        </button>)
-    }
-  </form>
+        />
+      </div>
+
+      <TextField
+        id="image"
+        label="Imagem"
+        placeholder={isEditing && editingProduct.urlImage}
+        value={urlImage}
+        onChange={(e) => setUrlImage(e.target.value)}
+        variant="outlined"
+        margin="normal"
+        fullWidth
+        size='small'
+
+      />
+
+      <Button type="submit" variant="contained" fullWidth color='inherit'>
+        {isEditing ? 'Editar Produto' : 'Adicionar Produto'}
+      </Button>
+
+      {isEditing && (
+        <Button 
+          type="button"
+          variant="contained"
+          color='inherit'
+          onClick={() => handleEdit(false, '')} 
+          fullWidth
+          style={{marginTop: '2%'}}
+        >
+          Cancelar
+        </Button>
+      )}
+    </form>
   );
 };
 

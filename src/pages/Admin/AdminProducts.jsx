@@ -1,10 +1,8 @@
 import {useEffect, useState} from 'react';
 import HeaderAdmin from '../../components/Header/HeaderAdmin';
-import ProductsList from '../../components/Admin/ProductsList';
+import ProductsList from '../../components/Order_List/ProductsList';
 import ProductForm from '../../components/Admin/AdminProductForm';
 import { getAllProducts} from '../../services/Api/products';
-
-
 
 const AdminProducts = () => {
   const [fetchProducs, setFetchProducts] = useState('idle');
@@ -16,12 +14,6 @@ const AdminProducts = () => {
     if (fetchProducs === 'idle') {
       setFetchProducts('pending')
       setProducts([])
-
-      // try {
-      //   const data = 
-      // } catch (error) {
-        
-      // }
       getAllProducts().then((r) => {
         setFetchProducts('done')
         setProducts(r)
@@ -35,17 +27,15 @@ const AdminProducts = () => {
   };
 
   return (
-    <div>
+    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
       <HeaderAdmin />
-      <h1>Admin - Produtos</h1>
-      <h1>Adicionar Novo Produto</h1>
       <ProductForm 
         isEditing={isEditing} 
         handleEdit={handleEdit} 
         editingProduct={product} 
         setFetchProducts={setFetchProducts}/>
       {products && 
-        <ProductsList products={products} handleEdit={handleEdit} setFetchProducts={setFetchProducts} />
+        <ProductsList handleEdit={handleEdit} setFetchProducts={setFetchProducts} />
       }
     </div>
   )

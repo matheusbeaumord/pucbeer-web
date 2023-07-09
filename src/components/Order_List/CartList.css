@@ -1,0 +1,25 @@
+.cart-item {
+    width: 100%;
+    border-bottom: 2px solid white;
+    border-top: 2px solid white;
+    padding: 15px;
+
+    .quantity {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .price {
+        font-size: 16px;
+        font-weight: bold;
+
+    }
+}
+
+.checkout-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}

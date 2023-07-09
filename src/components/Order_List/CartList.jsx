@@ -2,11 +2,16 @@ import { useContext } from 'react';
 
 import { Typography, Button } from '@mui/material';
 import { BeerContext } from '../../context/BeerContext';
+import { useMatch  } from 'react-router-dom';
+import classNames from "classnames";
+import './CartList.css';
 
+const CartList = () => {
 
+  const isOnCheckout = useMatch({
+    path: '/checkout',
 
-// eslint-disable-next-line react/prop-types
-const CartList = ({ removeItem }) => {
+  });
 
   const { cart, setCart } = useContext(BeerContext);
 
@@ -37,30 +42,38 @@ const CartList = ({ removeItem }) => {
 
   return (
     <div>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5">
         Carrinho
       </Typography>
       {Object.values(cart).map((item, index) => (
-        <div key={index}>
-          <Typography variant="body1">
-            Produto: {item.product.name}
-          </Typography>
-          <Typography variant="body2">
-            Quantidade: {item.quantity}
-          </Typography>
-          <Typography variant="body2">
-            Preço: R$ {item.product.price}
-          </Typography>
-          {removeItem && 
-            <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => handleRemoveFromCart(item.product)}
-            >
-                Remover
-            </Button>
+        <div 
+          key={index} 
+          className={classNames('cart-item', {
+            "checkout-page": isOnCheckout,
+          })}>
+            <div>
+              <Typography variant="h6">
+                Produto: {item.product.name}
+              </Typography>
+              <Typography variant="body2" className="quantity">
+                Quantidade: {item.quantity}
+              </Typography>
+              <Typography variant="body2" className="price">
+                Preço: R$ {item.product.price}
+              </Typography>
+            </div>
+          {!!isOnCheckout && 
+            <div>
+              <Button
+                  variant="contained"
+                  color="inherit"
+                  onClick={() => handleRemoveFromCart(item.product)}
+                  size='small'
+              >
+                  Remover
+              </Button>
+            </div>
           }
-          <hr />
         </div>
       ))}
     </div>

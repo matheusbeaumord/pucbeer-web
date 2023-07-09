@@ -1,0 +1,19 @@
+.submit-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 200px;
+    
+    margin-top: 15px;
+    
+    .price {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .adress {
+        /* width: 100%; */
+    }
+}

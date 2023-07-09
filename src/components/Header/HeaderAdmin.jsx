@@ -1,74 +1,192 @@
 import { useState } from 'react';
-import Hamburger from 'hamburger-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import "./HeaderAdmin.css"
+
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import SportsBarIcon from '@mui/icons-material/SportsBar';
+
 
 const Header = () => {
-  const [sideBar, setSideBar] = useState(false);
-
+  let navigate = useNavigate();
+  
   const logout = () => {
+    navigate("/login");
     localStorage.clear();
   };
 
+
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
-    <div>
-      <div className="header">
-        <button
-          type="submit"
-          onClick={ () => setSideBar(!sideBar) }
-          data-testid="top-hamburguer"
-          className="hameburgerButton"
+    <AppBar position="static" style={{backgroundColor: 'black'}}>
+    <Container maxWidth="xl">
+      <Toolbar disableGutters>
+        <SportsBarIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <Typography
+          variant="h6"
+          noWrap
+          component="a"
+          href="/"
+          sx={{
+            mr: 2,
+            display: { xs: 'none', md: 'flex' },
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
         >
-          <Hamburger easing="ease-in" />
-        </button>
-        <h2 data-testid="top-title">pucbeerer</h2>
-        <div />
-      </div>
-      {sideBar
-        && (
-          <div>
-            <div className="side-menu-container">
-              <div className="itensHamburguer">
-                <Link
-                  className="linksHamburguer"
-                  to="/admin/orders"
-                >
-                  Pedidos
-                </Link>
-              </div>
-              <div className="itensHamburguer">
-                <Link
-                  className="linksHamburguer"
-                  to="/admin/produtos"
-                >
-                  Produtos
-                </Link>
-              </div>
-              <div className="itensHamburguer">
-                <Link
-                  className="linksHamburguer"
-                  to="/admin/profile"
-                >
-                  Meu Perfil
-                </Link>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  onClick={ () => logout() }
-                  className="buttonLogOut"
-                >
-                  <Link
-                    to="/login"
-                    className="linksHamburguer"
-                  >
-                    Sair
-                  </Link>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-    </div>
+          TeleGoró
+        </Typography>
+
+        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleOpenNavMenu}
+            color="inherit"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+            sx={{
+              display: { xs: 'block', md: 'none' },
+            }}
+          >
+            <MenuItem key={'produtos'} onClick={handleCloseNavMenu}>
+              <Typography textAlign="center">{'Produtos'}</Typography>
+            </MenuItem>
+            <MenuItem key={'pedidos'} onClick={handleCloseNavMenu}>
+              <Typography textAlign="center">{'Pedidos'}</Typography>
+            </MenuItem>
+          </Menu>
+        </Box>
+        <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+        <Typography
+          variant="h5"
+          noWrap
+          component="a"
+          href=""
+          sx={{
+            mr: 2,
+            display: { xs: 'flex', md: 'none' },
+            flexGrow: 1,
+            fontFamily: 'monospace',
+            fontWeight: 700,
+            letterSpacing: '.3rem',
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
+        >
+          LOGO
+        </Typography>
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Button
+              key={'produtos'}
+              onClick={() => {
+                handleCloseNavMenu();
+                navigate("/admin/produtos");
+              }}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              {'Produtos'}
+            </Button>
+            <Button
+              key={'pedidos'}
+              onClick={() => {
+                handleCloseNavMenu;
+                navigate("/admin/orders");
+              }}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              {'Pedidos'}
+            </Button>
+        </Box>
+
+        <Box sx={{ flexGrow: 0 }}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleOpenUserMenu}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            <MenuItem key={1} onClick={() => {
+              handleCloseUserMenu;
+              navigate("/admin/profile");
+            }}>
+              <Typography textAlign="center">{'Profile'}</Typography>
+            </MenuItem>
+            <MenuItem key={1} onClick={() => logout()}>
+              <Typography textAlign="center">{'Logout'}</Typography>
+            </MenuItem>
+          </Menu>
+        </Box>
+      </Toolbar>
+    </Container>
+  </AppBar>
   );
 };
 

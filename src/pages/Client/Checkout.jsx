@@ -1,40 +1,32 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import { BeerContext } from '../../context/BeerContext';
 import { sendProducts } from '../../services/Api/products';
 
+import CartList from '../../components/Order_List/CartList'
+
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './Checkout.css'
+
 const Checkout = () => {
   const navigateTo = useNavigate();
 
-  const { cart } = useContext(BeerContext);
+  const { cart, setCart } = useContext(BeerContext);
 
   const [street, setStreet] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
-  const [localCart, setLocalCart] = useState(() => {
-    const localValue = JSON.parse(localStorage.getItem('cart'));
-    if (!localValue === undefined || !localValue === null) {
-      return localValue;
-    }
-    return ({ 0: { product: { price: 0 }, quantity: 0 } });
-  });
-  const [endSale, setEndSale] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      setLocalCart(JSON.parse(localStorage.getItem('cart')));
-      const cart1 = JSON.parse(localStorage.getItem('cart'));
-      setLocalCart(Object.values(cart1)
-        .filter((product) => product.quantity > 0 && product.product.id));
-    }
-  }, [cart]);
 
   if (!localStorage.getItem('token')) {
     return (<Link to="/login" />);
   }
 
-  const finalValue = Object.values(localCart).reduce((t, { quantity, product }) => {
+  const finalValue = Object.values(cart).reduce((t, { quantity, product }) => {
     if (!Number.isNaN(parseFloat(product.price))) {
       return t + quantity * parseFloat(product.price);
     }
@@ -43,14 +35,17 @@ const Checkout = () => {
 
   const accPrice = (price) => parseFloat(price).toFixed(2).toString().replace('.', ',');
 
-  const backToProducts = () => navigateTo('/products');
+  const backToProducts = () => {
+    navigateTo('/products'),
+    setCart('')
+  };
   const timeToGoToProducts = 2000;
 
   const finalizarPedido = async (e) => {
     const body = {
       deliveryAddress: street,
       deliveryNumber: houseNumber,
-      listProducts: localCart.map((product) => ({
+      listProducts:  Object.values(cart).map((product) => ({
         [product.product.id]: product.quantity,
       }))
         .reduce((acc, atual) => {
@@ -62,11 +57,21 @@ const Checkout = () => {
     };
     const token = JSON.parse(localStorage.getItem('token'));
     e.preventDefault();
-    await sendProducts(body, token);
-    setEndSale(true);
-    localStorage.setItem('cart', JSON.stringify({
-      0: { product: { price: 0 }, quantity: 0 },
-    }));
+    try {
+      await sendProducts(body, token);
+      toast.success('Predido realizado com sucesso!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    } catch (error) {
+      toast.error(error)
+    }
     setTimeout(backToProducts, timeToGoToProducts);
   };
 
@@ -76,88 +81,54 @@ const Checkout = () => {
     }
   };
 
-  const deleteProduct = (productName) => {
-    const storage = Object.values(localCart)
-      .filter((product) => product.product.name !== productName);
-    localStorage.setItem('cart', JSON.stringify(storage));
-    setLocalCart(JSON.parse(localStorage.getItem('cart')));
-  };
-
   return (
     <div>
-      <Header />
-      <h1 data-testid="top-title">Chekout</h1>
-      { (localCart.length === 0) ? <h3>Não há produtos no carrinho</h3>
-        : (
-          Object.values(localCart)
-            .map((product, index) => (
-              <div
-                key={ index }
-                className="products-checkout"
-              >
-                <span data-testid={ (`${index}-product-qtd-input`) }>
-                  {(`${product.quantity}`)}
-                </span>
-                <span data-testid={ (`${index}-product-name`) }>
-                  {(`${product.product.name}`)}
-                </span>
-                <span data-testid={ (`${index}-product-total-value`) }>
-                  {(`R$ ${accPrice((product.product.price) * (product.quantity))}`)}
-                </span>
-                <span data-testid={ (`${index}-product-unit-price`) }>
-                  {(`(R$ ${accPrice(product.product.price)} un)`)}
-                </span>
-                <button
-                  type="button"
-                  onClick={ () => deleteProduct(product.product.name) }
-                  data-testid={ (`${index}-removal-button`) }
-                >
-                  X
-                </button>
-              </div>
-            ))
-        )}
+    <Header />
+    <Typography variant="h4" data-testid="top-title">
+      Checkout
+    </Typography>
+    <CartList removeItem={true} />
+    <div className="submit-form">
       <div>
-        <span
-          data-testid="order-total-value"
-        >
+        <Typography variant="body1" className="price">
           {`Total: R$ ${accPrice(finalValue)}`}
-        </span>
+        </Typography>
+      </div>
+      <div className='adress-content'>
+        <TextField
+          label="Endereço"
+          type="text"
+          size='small'
+          className='adress'
+          value={street}
+          onChange={(e) => setStreet(e.target.value)}
+          data-testid="checkout-street-input"
+        />
+        <TextField
+          label="Número"
+          type="text"
+          size='small'
+          value={houseNumber}
+          onChange={(e) => setHouseNumber(e.target.value)}
+          data-testid="checkout-house-number-input"
+        />
       </div>
       <div>
-        <label htmlFor>
-          Rua
-          <input
-            type="text"
-            value={ street }
-            onChange={ ({ target: { value } }) => setStreet(value) }
-            data-testid="checkout-street-input"
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor>
-          Número da casa
-          <input
-            type="text"
-            value={ houseNumber }
-            onChange={ ({ target: { value } }) => setHouseNumber(value) }
-            data-testid="checkout-house-number-input"
-          />
-        </label>
-      </div>
-      <div>
-        <button
-          disabled={ !disableRule() }
-          type="submit"
-          onClick={ (e) => finalizarPedido(e) }
+        <Button
+          variant="contained"
+          color="inherit"
+
+          disabled={!disableRule()}
+          onClick={finalizarPedido}
           data-testid="checkout-finish-btn"
         >
           Finalizar Pedido
-        </button>
+        </Button>
       </div>
-      {endSale && <span>Compra realizada com sucesso!</span>}
-    </div>);
+      <ToastContainer />
+    </div>
+  </div>
+  );
 };
 
 export default Checkout;

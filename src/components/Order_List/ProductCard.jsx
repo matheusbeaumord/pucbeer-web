@@ -1,59 +1,121 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { BeerContext } from '../../context/BeerContext';
 import { Link } from 'react-router-dom';
-
+import { Card, CardContent, CardMedia, Typography, Button, Grid, Box } from '@mui/material';
 
 const ProductCard = (props) => {
   const { data } = props;
   const { key, product } = data;
   const { name, price, urlImage, id } = product;
-  const [quantity, setQuantity] = useState(() => {
-    const localValue = JSON.parse(localStorage.getItem('cart'));
-    if (localValue && localValue[id] && localValue[id].quantity) {
-      return localValue[id].quantity;
-    }
-    return 0;
-  });
+  const [quantity, setQuantity] = useState(0);
   const { cart, setCart } = useContext(BeerContext);
   const accPrice = price.replace('.', ',');
-
-  useEffect(() => {
-    const pushCart = { ...cart, [id]: { product, quantity } };
-    localStorage.setItem('cart', JSON.stringify(pushCart));
-    setCart(pushCart);
-  }, [quantity]);
 
   if (!localStorage.getItem('token')) {
     return (<Link to="/login" />);
   }
 
+  const handleAddToCart = () => {
+    // Verifica se o produto já está no carrinho
+    setQuantity(quantity + 1)
+    if (cart[product.id]) {
+      // Se estiver, incrementa a quantidade
+      setCart(prevCart => ({
+        ...prevCart,
+        [product.id]: {
+          product: product,
+          quantity: prevCart[product.id].quantity + 1,
+        },
+      }));
+    } else {
+      // Se não estiver, adiciona o produto ao carrinho
+      setCart(prevCart => ({
+        ...prevCart,
+        [product.id]: {
+          product: product,
+          quantity: 1,
+        },
+      }));
+    }
+  };
+
+  const handleRemoveFromCart = () => {
+    // Verifica se o produto está no carrinho
+    if (quantity > 0)setQuantity(quantity - 1);
+    if (cart[product.id]) {
+      // Verifica se a quantidade é maior que 1
+      if (cart[product.id].quantity > 1) {
+
+        // Se for maior que 1, decrementa a quantidade
+        setCart(prevCart => ({
+          ...prevCart,
+          [product.id]: {
+            product: product,
+            quantity: prevCart[product.id].quantity - 1,
+          },
+        }));
+      } else {
+        // Se for igual a 1, remove o produto do carrinho
+        setCart(prevCart => {
+          const updatedCart = { ...prevCart };
+          delete updatedCart[product.id];
+          return updatedCart;
+        });
+      }
+    }
+  };
+
   return (
-    <div>
-      <h5 data-testid={ `${key}-product-name` }>{name}</h5>
-      <p data-testid={ `${key}-product-price` }>{`R$ ${accPrice}`}</p>
-      <img
-        src={ urlImage }
-        alt={ `${key}-product-img` }
-        width="50"
-        data-testid={ `${key}-product-img` }
-      />
-      <button
-        type="button"
-        data-testid={ `${key}-product-minus` }
-        onClick={ () => { if (quantity > 0)setQuantity(quantity - 1); } }
-      >
-        -
-      </button>
-      <p data-testid={ `${key}-product-qtd` }>{quantity}</p>
-      <button
-        type="button"
-        data-testid={ `${key}-product-plus` }
-        onClick={ () => setQuantity(quantity + 1) }
-      >
-        +
-      </button>
-    </div>);
+    <Card sx={{ display: 'flex', width: 200, height: 300, justifyContent: 'space-between', flexDirection: 'column',  background: '#ffffff33', borderRadius: '10px'}}>
+      <Box display="flex" flexDirection="column" alignItems="center" my={2}>
+        <CardMedia
+          component="img"
+          alt={`${key}-product-img`}
+          image={urlImage}
+          sx={{
+            width: 100,
+            height: 110,
+          }}
+          data-testid={`${key}-product-img`}
+        />
+        <CardContent sx={{ display: 'flex', height: 180, justifyContent: 'space-between', flexDirection: 'column'}}>
+          <Typography variant="h5" component="h2" align="center" data-testid={`${key}-product-name`}>
+            {name}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" align="center" data-testid={`${key}-product-price`}>
+            {`R$ ${accPrice}`}
+          </Typography>
+          <Grid container alignItems="center" justifyContent="center" spacing={1}>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="inherit"
+                data-testid={`${key}-product-minus`}
+                onClick={handleRemoveFromCart}
+              >
+                -
+              </Button>
+            </Grid>
+            <Grid item>
+              <Typography variant="body2" data-testid={`${key}-product-qtd`}>{quantity}</Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="inherit"
+                data-testid={`${key}-product-plus`}
+                onClick={handleAddToCart}
+              >
+                +
+              </Button>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Box>
+    </Card>
+  );
 };
 
 ProductCard.propTypes = {

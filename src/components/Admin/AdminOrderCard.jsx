@@ -1,34 +1,75 @@
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
 import PropTypes from 'prop-types';
-
-import { Link } from 'react-router-dom';
-
+import dateFormat from 'dateformat';
+import './AdminOrderCard.css'
+import { Button } from '@mui/material';
+import {updateOrderStatus} from '../../services/Api/orders'
+import { ToastContainer, toast } from 'react-toastify';
 
 const AdminOrderCard = (props) => {
   const { data } = props;
   const { key, order } = data;
-  const [redirect, setRedirect] = useState(false);
-  const { total_price: price, id,
-    delivery_address: address, status, delivery_number: number } = order;
+  const { sale_date: date, total_price: price, products } = order;
   const accPrice = parseFloat(price).toFixed(2).toString().replace('.', ',');
 
-  if (redirect) return <Link to={ `/admin/orders/${id}` } />;
+  const handleApprove = () => {
+    try {
+      toast.success('Entrega em andamento', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+      updateOrderStatus(order.sale_id)
+
+    } catch (error) {
+      toast.error(error)
+      throw new Error(error)
+    }
+  }
 
   return (
+    <>
+    <ToastContainer />
+
     <div
-      data-testid={
-        `${key}-order-card-container`
-      }
-      onClick={ () => setRedirect(true) }
       role="button"
-      onKeyDown={ () => setRedirect(true) }
-      tabIndex={ 0 }
+      tabIndex={0}
+      className='card'
     >
-      <p data-testid={ `${key}-order-number` }>{`Pedido ${id}`}</p>
-      <p data-testid={ `${key}-order-address` }>{`${address}, ${number}`}</p>
-      <p data-testid={ `${key}-order-total-value` }>{`R$ ${accPrice}`}</p>
-      <p data-testid={ `${key}-order-status` }>{`${status}`}</p>
-    </div>);
+      <div className='card-title' >
+        <div>
+          <h3 data-testid={`${key}-order-date`}>{`Status: ${order.status}`}</h3>
+        </div>
+        <div>
+          <h3 data-testid={`${key}-order-date`}>{dateFormat(date, 'dd/mm')}</h3>
+        </div>
+      </div>
+      <ul className="list-products">
+        {products.map((product, index) => (
+          <li key={index}>{`${product.quantity} - ${product.product_name}`}</li>
+          ))}
+      </ul>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}} >
+      <Button
+        variant="contained"
+        color="inherit"
+        data-testid={`${key}-product-plus`}
+        onClick={handleApprove}
+        disabled={order.status !== 'Pendente'}
+      >
+        Aprovar
+      </Button>
+      <h3>{`R$ ${accPrice}`}</h3>
+      </div>
+    </div>
+    </>
+
+  );
 };
 
 AdminOrderCard.propTypes = {

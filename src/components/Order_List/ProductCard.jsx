@@ -1,13 +1,15 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { BeerContext } from '../../context/BeerContext';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardMedia, Typography, Button, Grid, Box } from '@mui/material';
+import { useMatch  } from 'react-router-dom';
 
-const ProductCard = (props) => {
-  const { data } = props;
-  const { key, product } = data;
+
+const ProductCard = ({product, handleEdit, handleDelete}) => {
   const { name, price, urlImage, id } = product;
   const [quantity, setQuantity] = useState(0);
   const { cart, setCart } = useContext(BeerContext);
@@ -16,6 +18,10 @@ const ProductCard = (props) => {
   if (!localStorage.getItem('token')) {
     return (<Link to="/login" />);
   }
+
+  const isOnCheckout = useMatch({
+    path: '/admin/produtos',
+  });  
 
   const handleAddToCart = () => {
     // Verifica se o produto já está no carrinho
@@ -68,50 +74,71 @@ const ProductCard = (props) => {
   };
 
   return (
-    <Card sx={{ display: 'flex', width: 200, height: 300, justifyContent: 'space-between', flexDirection: 'column',  background: '#ffffff33', borderRadius: '10px'}}>
+    <Card sx={{ display: 'flex', width: 250, height: 300, justifyContent: 'space-between', flexDirection: 'column',  background: '#ffffff33', borderRadius: '10px'}}>
       <Box display="flex" flexDirection="column" alignItems="center" my={2}>
         <CardMedia
           component="img"
-          alt={`${key}-product-img`}
+          alt={`${product.id}-product-img`}
           image={urlImage}
           sx={{
             width: 100,
             height: 110,
           }}
-          data-testid={`${key}-product-img`}
         />
         <CardContent sx={{ display: 'flex', height: 180, justifyContent: 'space-between', flexDirection: 'column'}}>
-          <Typography variant="h5" component="h2" align="center" data-testid={`${key}-product-name`}>
+          <Typography variant="h5" component="h2" align="center" >
             {name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" align="center" data-testid={`${key}-product-price`}>
+          <Typography variant="body2" color="textSecondary" align="center">
             {`R$ ${accPrice}`}
           </Typography>
-          <Grid container alignItems="center" justifyContent="center" spacing={1}>
-            <Grid item>
-              <Button
-                variant="contained"
-                color="inherit"
-                data-testid={`${key}-product-minus`}
-                onClick={handleRemoveFromCart}
-              >
-                -
-              </Button>
-            </Grid>
-            <Grid item>
-              <Typography variant="body2" data-testid={`${key}-product-qtd`}>{quantity}</Typography>
-            </Grid>
-            <Grid item>
-              <Button
-                variant="contained"
-                color="inherit"
-                data-testid={`${key}-product-plus`}
-                onClick={handleAddToCart}
-              >
-                +
-              </Button>
-            </Grid>
-          </Grid>
+          { !isOnCheckout ? (
+              <Grid container alignItems="center" justifyContent="center" spacing={1}>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="inherit"
+                    onClick={handleRemoveFromCart}
+                  >
+                    -
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body2">{quantity}</Typography>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="inherit"
+                    onClick={handleAddToCart}
+                  >
+                    +
+                  </Button>
+                </Grid>
+              </Grid>
+              ) : (
+                <Grid container alignItems="center" justifyContent="center" spacing={1}>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      color="inherit"
+                      onClick={() => handleEdit(true, product)}
+                    >
+                      Editar
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      color="inherit"
+                      onClick={() => handleDelete(product.id)}
+                    >
+                      Excluir
+                    </Button>
+                  </Grid>
+                </Grid>
+              )
+        }
         </CardContent>
       </Box>
     </Card>

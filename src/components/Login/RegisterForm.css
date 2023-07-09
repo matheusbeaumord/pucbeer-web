@@ -97,25 +97,29 @@ body {
 }
 
 .login__fieldVend {
-    margin-left: 40px;
+    margin-left: 50px;
     color: white;
     background-color: black;
     border-radius: 10px;
-    width: 180px;
+    width: 150px;
 	text-align: center;
-	height: 35px;
+	height: 23px;
 }
 
 .login__input {
 	border: none;
 	border-bottom: 2px solid #d1d1d4;
 	background: none;
-	padding: 10px;
+	padding: 7px;
 	padding-left: 24px;
 	font-weight: 700;
-	width: 75%;
+	width: 90%;
 	transition: 0.2s;
     color: black;
+}
+
+.login__radio {
+	margin-left: 10px;
 }
 
 .login__input:active,
@@ -150,13 +154,11 @@ body {
 	outline: none;
 }
 
-.lnkCad {
-    color: white;
-    font-family: Raleway, sans-serif;
-    text-decoration: solid;
-    border: 5px solid rgb(42, 42, 42);
-    background-color: rgb(42, 42, 42);
-    border-radius: 10px;
+.icon__back {
+	position: relative;
+	left: 280px;
+	top: 50px;
+	color: black;
 }
 
 .login__icon {

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { deleteProduct } from '../../services/Api/products';
+import './ProductsList.css'
 
 
 const ProductsList = ({ products, handleEdit, setFetchProducts }) => {

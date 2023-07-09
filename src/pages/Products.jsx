@@ -21,13 +21,14 @@ const Products = () => {
 
   const accPrice = parseFloat(value).toFixed(2).toString().replace('.', ',');
   const admin = JSON.parse(localStorage.getItem('role'));
+  
   return (
     <div>
       {admin === 'administrator' ? <HeaderAdmin /> : <Header />}
       <Typography variant="h1">Produtos</Typography>
       <div style={{ display: 'flex' }}>
         <div style={{ flex: '1' }}>
-          <ProductsList cart={cart} />
+          <ProductsList  />
         </div>
         <div>
           <CartList cart={cart}/>

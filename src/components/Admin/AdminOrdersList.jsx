@@ -12,12 +12,13 @@ const AdminOrdersList = () => {
       JSON.parse(localStorage.getItem('token')),
     ).then((r) => { setOrders(r) });
   }, []);
+  
   if (!localStorage.getItem('token')) {
     return (<Link to="/login" />);
   }
+
   return (
-    <div>
-      <h1>Página pedidos</h1>
+    <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
       {orders.map(
         (order, key) => <AdminOrderCard data={ { order, key } } key={ key } />,
       )}

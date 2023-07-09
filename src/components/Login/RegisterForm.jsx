@@ -149,7 +149,7 @@ const LoginForm = () => {
       <Link className='icon__back' to="/login" data-testid="no-account-btn">
         <ArrowBackIcon/>
       </Link>
-      </form>
+      </div>
     </div>
 );
 };

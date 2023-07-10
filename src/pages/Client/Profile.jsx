@@ -3,10 +3,11 @@ import Header from '../../components/Header/Header';
 
 function ClientProfile() {
   return (
-    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-
+    <div>
       <Header />
-      <ClientProfileForm />
+      <div className="profile">
+        <ClientProfileForm />
+      </div>
     </div>
   );
 }

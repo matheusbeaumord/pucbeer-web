@@ -74,7 +74,7 @@ const ProductCard = ({product, handleEdit, handleDelete}) => {
   };
 
   return (
-    <Card sx={{ display: 'flex', width: 250, height: 300, justifyContent: 'space-between', flexDirection: 'column',  background: '#ffffff33', borderRadius: '10px'}}>
+    <Card className="card-item" sx={{ display: 'flex', width: 200, height: 300, justifyContent: 'space-between', flexDirection: 'column',  background: '#ffffff33', borderRadius: '10px'}}>
       <Box display="flex" flexDirection="column" alignItems="center" my={2}>
         <CardMedia
           component="img"

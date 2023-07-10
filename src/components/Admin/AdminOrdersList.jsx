@@ -18,10 +18,14 @@ const AdminOrdersList = () => {
   }
 
   return (
-    <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-      {orders.map(
-        (order, key) => <AdminOrderCard data={ { order, key } } key={ key } />,
-      )}
-    </div>);
+    <div>
+      <h1>Pedidos</h1>
+      <div >
+        {orders.map(
+          (order, key) => <AdminOrderCard data={ { order, key } } key={ key } />,
+        )}
+      </div>
+    </div>
+  );
 };
 export default AdminOrdersList;

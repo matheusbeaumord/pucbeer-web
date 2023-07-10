@@ -37,10 +37,7 @@ const ClientProfileForm = () => {
     }
   };
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' , width: '50%', justifyContent: 'center', padding: '2%' }}>
-
-    <h2>Alterar usuário</h2>
-
+    <div className="profile-component" >
     <Box
       component="form"
       noValidate

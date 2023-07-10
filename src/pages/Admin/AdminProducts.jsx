@@ -27,7 +27,7 @@ const AdminProducts = () => {
   };
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+    <div>
       <HeaderAdmin />
       <ProductForm 
         isEditing={isEditing} 

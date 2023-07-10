@@ -20,13 +20,15 @@ const ProductsList = ({ handleEdit, setFetchProducts }) => {
   };
   
   return (
-    <Grid container spacing={2}>
-      {products.map((product, index) => (
-        <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-          <ProductCard product={product} handleEdit={handleEdit} handleDelete={handleDelete} />
-        </Grid>
-      ))}
-    </Grid>
+    <div>
+      <Grid container spacing={2}>
+        {products.map((product, index) => (
+          <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+            <ProductCard product={product} handleEdit={handleEdit} handleDelete={handleDelete} />
+          </Grid>
+        ))}
+      </Grid>
+    </div>
   );
 };
 export default ProductsList;

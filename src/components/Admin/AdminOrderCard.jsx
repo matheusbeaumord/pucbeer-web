@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
-import './AdminOrderCard.css'
 import { Button } from '@mui/material';
 import {updateOrderStatus} from '../../services/Api/orders'
 import { ToastContainer, toast } from 'react-toastify';

@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Checkout.css'
+import '../Pages.css'
 
 const Checkout = () => {
   const navigateTo = useNavigate();
@@ -84,48 +85,50 @@ const Checkout = () => {
   return (
     <div>
     <Header />
-    <Typography variant="h4" data-testid="top-title">
-      Checkout
-    </Typography>
-    <CartList removeItem={true} />
-    <div className="submit-form">
+    
+    <div className="checkout">
       <div>
-        <Typography variant="body1" className="price">
-          {`Total: R$ ${accPrice(finalValue)}`}
-        </Typography>
+        <CartList removeItem={true} />
       </div>
-      <div className='adress-content'>
-        <TextField
-          label="Endereço"
-          type="text"
-          size='small'
-          className='adress'
-          value={street}
-          onChange={(e) => setStreet(e.target.value)}
-          data-testid="checkout-street-input"
-        />
-        <TextField
-          label="Número"
-          type="text"
-          size='small'
-          value={houseNumber}
-          onChange={(e) => setHouseNumber(e.target.value)}
-          data-testid="checkout-house-number-input"
-        />
-      </div>
-      <div>
-        <Button
-          variant="contained"
-          color="inherit"
+      <div className="submit-form">
+        <div>
+          <Typography variant="body1" className="price">
+            {`Total: R$ ${accPrice(finalValue)}`}
+          </Typography>
+        </div>
+        <div className='adress-content'>
+          <TextField
+            label="Endereço"
+            type="text"
+            size='small'
+            className='adress'
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
+            data-testid="checkout-street-input"
+          />
+          <TextField
+            label="Número"
+            type="text"
+            size='small'
+            value={houseNumber}
+            onChange={(e) => setHouseNumber(e.target.value)}
+            data-testid="checkout-house-number-input"
+          />
+        </div>
+        <div>
+          <Button
+            variant="contained"
+            color="inherit"
 
-          disabled={!disableRule()}
-          onClick={finalizarPedido}
-          data-testid="checkout-finish-btn"
-        >
-          Finalizar Pedido
-        </Button>
+            disabled={!disableRule()}
+            onClick={finalizarPedido}
+            data-testid="checkout-finish-btn"
+          >
+            Finalizar Pedido
+          </Button>
+        </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
     </div>
   </div>
   );

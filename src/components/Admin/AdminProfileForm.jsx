@@ -37,7 +37,7 @@ const AdminProfileForm = () => {
     }
   };
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' , width: '50%', justifyContent: 'center', padding: '2%' }}>
+    <div>
 
     <h2>Alterar usuário</h2>
 

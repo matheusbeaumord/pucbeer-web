@@ -15,9 +15,5 @@
 
     .adress-content {
         display: flex;
-        width: 90%;
-    }
-    .adress {
-        width: 100%;
     }
 }

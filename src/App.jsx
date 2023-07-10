@@ -25,7 +25,7 @@ function App() {
           <Route exact path='/login' element={<Login/>} />
           <Route exact path='/register' element={<Register/>} />
           <Route exact path='/admin/orders' element={<AdminOrders/>} />
-          <Route exact path='/admin/produtos' element={<AdminProducts/>} />
+          <Route exact path='/admin/products' element={<AdminProducts/>} />
           <Route exact path='/admin/profile' element={<AdminProfile/>} />
           <Route exact path='/products' element={<Products/>} />
           <Route exact path='/orders' element={<Orders/>} />
@@ -34,7 +34,7 @@ function App() {
           <Route exact path='/checkout' element={<Checkout/>} />
         </Routes>
     </Router>
-    </Provider>
+  </Provider>
   )
 }
 

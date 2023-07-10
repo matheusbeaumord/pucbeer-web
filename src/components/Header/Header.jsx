@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import SportsBarIcon from '@mui/icons-material/SportsBar';
+import Breadcrumbs from '../../utils/BreadcrumpUtil';
 
 const Header = () => {
   let navigate = useNavigate();
@@ -42,6 +43,7 @@ const Header = () => {
   };
 
   return (
+    <>
     <AppBar position="static" style={{backgroundColor: 'black'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -204,6 +206,8 @@ const Header = () => {
         </Toolbar>
       </Container>
     </AppBar>
+    <Breadcrumbs />
+    </>
   );
 };
 

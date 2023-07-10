@@ -15,7 +15,6 @@ const OrdersList = () => {
   const [maxPrice, setMaxPrice] = useState(100);
 
   const [selectedStatus, setSelectedStatus] = useState(['Pendente', 'Entregue']);
-  console.log("🚀 ~ file: OrdersList.jsx:18 ~ OrdersList ~ selectedStatus:", selectedStatus)
 
   if (!localStorage.getItem('token')) {
     return <Link to="/login" />;

@@ -1,12 +1,14 @@
-h1 {
+/* h1 {
     padding: 20px;
-}
+} */
 
-.div_geral {
-    margin-top: 70px;
-    position: fixed;
+/* .div_geral {
+    display: flex;
+    flex-direction: column;
+    width: '50%';
+    margin-top: 10px;
 }
 
 .btn_salvar {
     margin-left: 5px;
-}
+} */

@@ -4,7 +4,6 @@ import Header from '../components/Header/Header';
 import HeaderAdmin from '../components/Header/HeaderAdmin';
 import ProductsList from '../components/Order_List/ProductsList';
 import { BeerContext } from '../context/BeerContext';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CartList from '../components/Order_List/CartList'
 
@@ -25,7 +24,7 @@ const Products = () => {
   return (
     <div>
       {admin === 'administrator' ? <HeaderAdmin /> : <Header />}
-      <Typography variant="h1">Produtos</Typography>
+      <h1 data-testid="top-title">Produtos</h1>
       <div style={{ display: 'flex' }}>
         <div style={{ flex: '1' }}>
           <ProductsList  />

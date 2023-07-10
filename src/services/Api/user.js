@@ -13,11 +13,14 @@ export const loginUser = async (email, password) => {
   return result.data;
 };
 
-export const updateUserName = async (newName, token) => {
+export const updateUserName = async ({ newName, newEmail }, token) => {
   try {
     const result = await instance.post(
       'updateUserName',
-      { name: newName },
+      {
+        name: newName,
+        email: newEmail,
+      },
       {
         headers: {
           Authorization: token,

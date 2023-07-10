@@ -20,7 +20,7 @@ const ProductCard = ({product, handleEdit, handleDelete}) => {
   }
 
   const isOnCheckout = useMatch({
-    path: '/admin/produtos',
+    path: '/admin/products',
   });  
 
   const handleAddToCart = () => {

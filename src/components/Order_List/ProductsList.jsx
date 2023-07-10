@@ -17,7 +17,7 @@ const ProductsList = ({ handleEdit, setFetchProducts }) => {
   const [maxPrice, setMaxPrice] = useState(100);
 
   const isOnAdmin = useMatch({
-    path: '/admin/produtos',
+    path: '/admin/products',
   });
 
   useEffect(() => {

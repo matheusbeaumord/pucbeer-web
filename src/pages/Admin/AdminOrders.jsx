@@ -1,12 +1,12 @@
 
 import HeaderAdmin from '../../components/Header/HeaderAdmin';
-import AdminOrdersList from '../../components/Admin/AdminOrdersList';
+import OrdersList from '../../components/Order_List/OrdersList';
 
 const AdminOrders = () => (
   <div>
     <HeaderAdmin />
     <div className="pedidos">
-      <AdminOrdersList />
+      <OrdersList />
     </div>
   </div>);
 

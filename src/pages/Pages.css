@@ -5,7 +5,25 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+    .searchBar {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5%;
+    }
+
+    .admin-searchBar {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5%;
+      padding-bottom: 2%;
+    }
 }
+
   
 .products .client-products-list {
   flex: 8;
@@ -48,19 +66,46 @@
     justify-content: center;
     flex-wrap: wrap;
     padding: 2%;
-
-    .order-list {
+    
+    .order {
+      .order-list {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
+      }
+
+      .order-searchBar {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5%;
+      }
+  
+      .admin-order-searchBar {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5%;
+        padding-bottom: 2%;
+      }
     }
-    
 }
 
 @media (max-width: 600px) {
   .products .client-products-list {
       width: 100%;
+
+      .searchBar {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5%;
+      }
   }
 
   .products .client-products-list .card-item {
@@ -69,6 +114,15 @@
 
   .products .admin-products-list {
       width: 100%;
+
+      .admin-searchBar {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5%;
+      }
   }
 
   .products .admin-products-list .card-item {
@@ -93,6 +147,17 @@
     width: 330px;
   }
 
+  .pedidos .order {
+    .order-searchBar {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5%;
+    }
+  }
+  
   .profile {
     width: 100%;
 

@@ -4,13 +4,17 @@ export const registerUser = async (name, email, role, password) => {
     const result = await instance.post('user', { name, email, role, password });
     return result;
   } catch (error) {
-    return { error: 'usuário existe ou algo assim' };
+    throw new Error(error);
   }
 };
 
 export const loginUser = async (email, password) => {
-  const result = await instance.post('login', { email, password });
-  return result.data;
+  try {
+    const result = await instance.post('login', { email, password });
+    return result.data;
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 export const updateUserName = async ({ newName, newEmail }, token) => {
@@ -29,7 +33,7 @@ export const updateUserName = async ({ newName, newEmail }, token) => {
     );
     return result;
   } catch (error) {
-    return { error: 'usuário existe ou algo assim' };
+    throw new Error(error);
   }
 };
 

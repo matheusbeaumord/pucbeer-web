@@ -7,6 +7,8 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import './ClientProfileForm.css'
 import {updateUserName} from '../../services/Api/user'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 const ClientProfileForm = () => {
@@ -32,10 +34,30 @@ const ClientProfileForm = () => {
       await updateUserName({newName, newEmail}, token);
       localStorage.setItem('name', JSON.stringify(newName, token));
       localStorage.setItem('email', JSON.stringify(newEmail, token));
+      toast.success('usuário alterado com sucesso', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
     } catch (error) {
-      throw new Error(error)
+      toast.error('Email ja cadastrado', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      })
     }
   };
+
   return (
     <div className="profile-component" >
     <Box
@@ -118,6 +140,7 @@ const ClientProfileForm = () => {
       {`Email: ${email}`}
       </h1>
        </div> */}
+      <ToastContainer />
     </div>
 
   );

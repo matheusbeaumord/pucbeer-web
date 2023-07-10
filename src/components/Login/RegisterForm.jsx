@@ -6,13 +6,14 @@ import { registerUser } from '../../services/Api/user';
 import LoginAuth from '../../services/Auth/Login';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import '../Login/RegisterForm.css'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [seller, setSeller] = useState(false);
-  const [showError, setShowError] = useState(false);
 
   const navigateTo = useNavigate();
 
@@ -20,14 +21,22 @@ const LoginForm = () => {
   const cadastrar = async (e) => {
     e.preventDefault();
     const role = seller ? 'administrator' : 'client';
-    const user = await registerUser(name, email, role, password);
-    if (user.error) {
-      setShowError(true);
-    } else {
-      LoginAuth(e, email, password, navigateTo);
+    try {
+      await registerUser(name, email, role, password).then(() => {
+        LoginAuth(e, email, password, navigateTo)
+      })
+    } catch (error) {
+      toast.error('Já existe um usuário com esse e-mail.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      })
     }
-
-    return user;
   };
 
   const validateLogin = () => {
@@ -104,7 +113,6 @@ const LoginForm = () => {
             >
             <span className="button__text">Cadastrar</span>
             </button>
-            {showError && <p className='msgErro'>Já existe um usuário com esse e-mail.</p>}
             <Link className='icon__back' to="/login" data-testid="no-account-btn">
               <ArrowBackIcon/>
             </Link>
@@ -117,6 +125,7 @@ const LoginForm = () => {
           <span className="screen__background__shape screen__background__shape1"></span>
         </div>
       </div>
+      <ToastContainer />
     </div>
 );
 };

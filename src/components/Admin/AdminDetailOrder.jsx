@@ -39,8 +39,9 @@ const AdminDetailOrder = () => {
     return (<Link to="/login" />);
   }
   return (
-    <div>
-      <h1 data-testid="top-title">Detalhes de Pedido</h1>
+      <div style={{ display: 'flex', flexDirection: 'column' , width: '50%', justifyContent: 'center', padding: '2%' }}>
+
+      <h2 data-testid="top-title">Detalhes de Pedido</h2>
       {!loading && (
         <div>
           <h2 data-testid="order-number">{`Pedido  ${id}`}</h2>

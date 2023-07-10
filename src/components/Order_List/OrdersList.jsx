@@ -5,7 +5,6 @@ import OrderCard from './OrderCard';
 import { Link } from 'react-router-dom';
 import { useMatch } from 'react-router-dom';
 import { Slider, Typography, FormControlLabel, Checkbox } from '@mui/material';
-// import classNames from 'classnames';
 import AdminOrderCard from '../Admin/AdminOrderCard'
 
 const OrdersList = () => {
@@ -75,10 +74,6 @@ const OrdersList = () => {
     <div className="order">
       <div
         className="order-searchBar"
-        // className={classNames({
-        //   'admin-order-searchBar': isOnAdmin,
-        //   'order-searchBar': !isOnAdmin,
-        // })}
         >
         <h2>Filtro</h2>
         <div>

@@ -4,7 +4,9 @@ import AdminProfileForm from '../../components/Admin/AdminProfileForm';
 const AdminProfile = () => (
   <div>
     <HeaderAdmin />
-    <AdminProfileForm />
+    <div className="profile">
+      <AdminProfileForm />
+    </div>
   </div>
 );
 export default AdminProfile;

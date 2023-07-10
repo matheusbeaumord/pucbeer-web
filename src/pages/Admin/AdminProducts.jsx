@@ -29,14 +29,18 @@ const AdminProducts = () => {
   return (
     <div>
       <HeaderAdmin />
-      <ProductForm 
-        isEditing={isEditing} 
-        handleEdit={handleEdit} 
-        editingProduct={product} 
-        setFetchProducts={setFetchProducts}/>
-      {products && 
-        <ProductsList handleEdit={handleEdit} setFetchProducts={setFetchProducts} />
-      }
+      <div className="products">
+        <ProductForm 
+          isEditing={isEditing} 
+          handleEdit={handleEdit} 
+          editingProduct={product} 
+          setFetchProducts={setFetchProducts}/>
+        {products && 
+          <div className="admin-products-list">
+            <ProductsList handleEdit={handleEdit} setFetchProducts={setFetchProducts} />
+          </div>
+        }
+      </div>
     </div>
   )
 };

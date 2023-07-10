@@ -47,17 +47,15 @@ const ClientProfileForm = () => {
         <TextField
           className='lbl_nome'
           id="outlined"
-          label="Nome"
+          label={`Nome: ${name}`}
           sx={{ m: 1, width: '50ch' }}
-          placeholder={name}
           onChange={ ({ target: { value } }) => setNewName(value) }
         />
         <TextField
           className='lbl_email'
           id="outlined"
-          label="E-mail"
+          label={`E-mail: ${email}`}
           sx={{ m: 1, width: '38ch' }}
-          placeholder={email}
           onChange={ ({ target: { value } }) => setNewEmail(value) }
         />
         {/* <TextField

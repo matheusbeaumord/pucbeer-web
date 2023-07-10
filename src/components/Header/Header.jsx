@@ -104,6 +104,12 @@ const Header = () => {
                 }}>
                 <Typography textAlign="center">{'Pedidos'}</Typography>
               </MenuItem>
+              <MenuItem key={'carrinho'} onClick={() => {
+                  handleCloseNavMenu;
+                  navigate("/checkout");
+                }}>
+                <Typography textAlign="center">{'Carrinho'}</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <SportsBarIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -144,6 +150,16 @@ const Header = () => {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {'Pedidos'}
+              </Button>
+              <Button
+                key={'carrinho'}
+                onClick={() => {
+                  handleCloseNavMenu;
+                  navigate("/checkout");
+                }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {'Carrinho'}
               </Button>
           </Box>
 

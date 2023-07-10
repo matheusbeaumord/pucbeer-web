@@ -49,10 +49,10 @@ const AdminProductForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{marginBottom: '2%'}}>
       <h2>Adicionar Novo Produto</h2>
 
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '5%'}} >
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '5%', marginBottom: '10px' }} >
         <TextField
           id="name"
           label="Nome"

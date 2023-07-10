@@ -33,8 +33,6 @@ const AdminOrderCard = (props) => {
 
   return (
     <>
-    <ToastContainer />
-
     <div
       role="button"
       tabIndex={0}
@@ -66,6 +64,7 @@ const AdminOrderCard = (props) => {
       <h3>{`R$ ${accPrice}`}</h3>
       </div>
     </div>
+    <ToastContainer />
     </>
 
   );

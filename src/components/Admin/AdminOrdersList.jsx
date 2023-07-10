@@ -19,8 +19,7 @@ const AdminOrdersList = () => {
 
   return (
     <div>
-      <h1>Pedidos</h1>
-      <div >
+      <div className='order-list'>
         {orders.map(
           (order, key) => <AdminOrderCard data={ { order, key } } key={ key } />,
         )}

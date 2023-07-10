@@ -92,11 +92,23 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <MenuItem key={'produtos'} onClick={handleCloseNavMenu}>
+              <MenuItem key={'produtos'} onClick={() => {
+                  handleCloseNavMenu();
+                  navigate("/products");
+                }}>
                 <Typography textAlign="center">{'Produtos'}</Typography>
               </MenuItem>
-              <MenuItem key={'pedidos'} onClick={handleCloseNavMenu}>
+              <MenuItem key={'pedidos'} onClick={() => {
+                  handleCloseNavMenu;
+                  navigate("/orders");
+                }}>
                 <Typography textAlign="center">{'Pedidos'}</Typography>
+              </MenuItem>
+              <MenuItem key={'carrinho'} onClick={() => {
+                  handleCloseNavMenu;
+                  navigate("/checkout");
+                }}>
+                <Typography textAlign="center">{'Carrinho'}</Typography>
               </MenuItem>
             </Menu>
           </Box>
@@ -138,6 +150,16 @@ const Header = () => {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {'Pedidos'}
+              </Button>
+              <Button
+                key={'carrinho'}
+                onClick={() => {
+                  handleCloseNavMenu;
+                  navigate("/checkout");
+                }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {'Carrinho'}
               </Button>
           </Box>
 

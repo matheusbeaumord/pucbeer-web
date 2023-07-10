@@ -37,10 +37,7 @@ const AdminProfileForm = () => {
     }
   };
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' , width: '50%', justifyContent: 'center', padding: '2%' }}>
-
-    <h2>Alterar usuário</h2>
-
+    <div className="profile-component" >
     <Box
       component="form"
       noValidate
@@ -50,17 +47,15 @@ const AdminProfileForm = () => {
         <TextField
           className='lbl_nome'
           id="outlined"
-          label="Nome"
+          label={`Nome: ${name}`}
           sx={{ m: 1, width: '50ch' }}
-          placeholder={name}
           onChange={ ({ target: { value } }) => setNewName(value) }
         />
         <TextField
           className='lbl_email'
           id="outlined"
-          label="E-mail"
+          label={`E-mail: ${email}`}
           sx={{ m: 1, width: '38ch' }}
-          placeholder={email}
           onChange={ ({ target: { value } }) => setNewEmail(value) }
         />
         {/* <TextField

@@ -1,7 +1,6 @@
 .cart-item {
-    width: 100%;
+    min-width: 100%;
     border-bottom: 2px solid white;
-    border-top: 2px solid white;
     padding: 15px;
 
     .quantity {

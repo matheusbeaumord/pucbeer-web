@@ -6,6 +6,7 @@ import ProductsList from '../components/Order_List/ProductsList';
 import { BeerContext } from '../context/BeerContext';
 import Button from '@mui/material/Button';
 import CartList from '../components/Order_List/CartList'
+import './Pages.css'
 
 const Products = () => {
   const { cart } = useContext(BeerContext);
@@ -24,12 +25,11 @@ const Products = () => {
   return (
     <div>
       {admin === 'administrator' ? <HeaderAdmin /> : <Header />}
-      <h1 data-testid="top-title">Produtos</h1>
-      <div style={{ display: 'flex' }}>
-        <div style={{ flex: '1' }}>
+      <div className="products">
+        <div className="client-products-list">
           <ProductsList  />
         </div>
-        <div>
+        <div className="client-cart">
           <CartList cart={cart}/>
           <Button
             onClick={() => navigateTo('/checkout')}
@@ -37,9 +37,9 @@ const Products = () => {
             disabled={!value > 0}
             fullWidth
             color="inherit"
-            style={{marginTop: '15%'}}
+            style={{marginTop: '5%'}}
           >
-            {`Ver Carrinho R$ ${accPrice}`}
+            {`R$ ${accPrice}`}
           </Button>
         </div>
       </div>

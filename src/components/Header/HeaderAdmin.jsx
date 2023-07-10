@@ -94,10 +94,16 @@ const Header = () => {
               display: { xs: 'block', md: 'none' },
             }}
           >
-            <MenuItem key={'produtos'} onClick={handleCloseNavMenu}>
+            <MenuItem key={'produtos'} onClick={() => {
+                handleCloseNavMenu();
+                navigate("/admin/produtos");
+              }}>
               <Typography textAlign="center">{'Produtos'}</Typography>
             </MenuItem>
-            <MenuItem key={'pedidos'} onClick={handleCloseNavMenu}>
+            <MenuItem key={'pedidos'} onClick={() => {
+                handleCloseNavMenu;
+                navigate("/admin/orders");
+              }}>
               <Typography textAlign="center">{'Pedidos'}</Typography>
             </MenuItem>
           </Menu>

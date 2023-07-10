@@ -5,8 +5,9 @@ import AdminOrdersList from '../../components/Admin/AdminOrdersList';
 const AdminOrders = () => (
   <div>
     <HeaderAdmin />
-    <h1>Pedidos</h1>
-    <AdminOrdersList />
+    <div className="pedidos">
+      <AdminOrdersList />
+    </div>
   </div>);
 
 export default AdminOrders;

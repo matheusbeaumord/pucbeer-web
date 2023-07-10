@@ -13,7 +13,6 @@ import OrdersDetail from './pages/Client/OrdersDetail';
 import Checkout from './pages/Client/Checkout';
 import AdminProfile from './pages/Admin/Profile';
 import AdminOrders from './pages/Admin/AdminOrders';
-import AdminDetailOrder from './pages/Admin/OrdersDetail';
 import AdminProducts from './pages/Admin/AdminProducts';
 import {Provider} from './context/BeerContext';
 
@@ -33,7 +32,6 @@ function App() {
           <Route exact path='/orders/:numeroDoPedido' element={<OrdersDetail/>} />
           <Route exact path='/profile' element={<ClientProfile/>} />
           <Route exact path='/checkout' element={<Checkout/>} />
-          <Route exact path='/admin/orders/:id' element={<AdminDetailOrder/>} />
         </Routes>
     </Router>
     </Provider>

@@ -41,10 +41,7 @@ const CartList = () => {
   };
 
   return (
-    <div>
-      <Typography variant="h5">
-        Carrinho
-      </Typography>
+    <div style={{minWidth: '300px'}}>
       {Object.values(cart).map((item, index) => (
         <div 
           key={index} 

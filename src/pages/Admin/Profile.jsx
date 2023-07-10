@@ -2,9 +2,11 @@ import HeaderAdmin from '../../components/Header/HeaderAdmin';
 import AdminProfileForm from '../../components/Admin/AdminProfileForm';
 
 const AdminProfile = () => (
-  <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+  <div>
     <HeaderAdmin />
-    <AdminProfileForm />
+    <div className="profile">
+      <AdminProfileForm />
+    </div>
   </div>
 );
 export default AdminProfile;

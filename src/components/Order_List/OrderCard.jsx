@@ -6,7 +6,6 @@ import './OrderCard.css'
 const OrderCard = (props) => {
   const { data } = props;
   const { key, order } = data;
-  console.log("🚀 ~ file: OrderCard.jsx:9 ~ OrderCard ~ order:", order)
   const { sale_date: date, total_price: price, products } = order;
   const accPrice = parseFloat(price).toFixed(2).toString().replace('.', ',');
 

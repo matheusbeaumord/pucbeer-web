@@ -16,10 +16,11 @@ const OrdersList = () => {
     return (<Link to="/login" />);
   }
   return (
-    <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+    <div className='order-list'>
       {orders.map(
         (order, key) => <OrderCard data={ { order, key } } key={ key } />,
       )}
-    </div>);
+    </div>
+  );
 };
 export default OrdersList;

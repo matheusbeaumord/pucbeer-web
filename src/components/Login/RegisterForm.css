@@ -106,6 +106,10 @@ body {
 	height: 23px;
 }
 
+.inpt_vend {
+	margin-left: 7px;
+}
+
 .login__input {
 	border: none;
 	border-bottom: 2px solid #d1d1d4;
@@ -157,7 +161,7 @@ body {
 .icon__back {
 	position: relative;
 	left: 280px;
-	top: 50px;
+	top: 35px;
 	color: black;
 }
 
@@ -166,4 +170,14 @@ body {
     position: relative;
     top:-20px;
     font-size: 20px;
+}
+
+.msgErro {
+	font-size: 14px;
+	margin-top: 9px;
+	margin-left: 5px;
+	background-color:rgb(96, 0, 0);
+	color: white;
+	border: 1px solid black;
+	border-radius: 5px;
 }

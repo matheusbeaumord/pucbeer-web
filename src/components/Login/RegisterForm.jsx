@@ -86,7 +86,7 @@ const LoginForm = () => {
             <div className='login__fieldVend'>
               Quer vender ?
               <input
-              className="login__input"
+              className='inpt_vend'
               id="checkbox"
               name="querVender"
               data-testid="signup-seller"
@@ -104,7 +104,10 @@ const LoginForm = () => {
             >
             <span className="button__text">Cadastrar</span>
             </button>
-            {showError && <p>Já existe um usuário com esse e-mail.</p>}
+            {showError && <p className='msgErro'>Já existe um usuário com esse e-mail.</p>}
+            <Link className='icon__back' to="/login" data-testid="no-account-btn">
+              <ArrowBackIcon/>
+            </Link>
           </form>
         </div>
         <div className="screen__background">
@@ -113,42 +116,6 @@ const LoginForm = () => {
           <span className="screen__background__shape screen__background__shape2"></span>
           <span className="screen__background__shape screen__background__shape1"></span>
         </div>
-        <div className='login__field'>
-          <input
-          placeholder='Senha'
-          className="login__input"
-          id="password"
-          data-testid="signup-password"
-          type="password"
-          value={ password }
-          onChange={ ({ target: { value } }) => setPassword(value) }
-          />
-        </div>
-        <div className='login__fieldVend'>
-          Quer vender ?
-          <input
-          className="login__radio"
-          id="checkbox"
-          name="querVender"
-          data-testid="signup-seller"
-          type="checkbox"
-          checked={ seller }
-          onClick={ () => setSeller(!seller) }
-          />
-        </div>
-        <button
-          className='button login__submit'
-          data-testid="signup-btn"
-          type="submit"
-          disabled={ !validateLogin() }
-          onClick={ (e) => cadastrar(e) }
-        >
-        <span className="button__text">Cadastrar</span>
-        </button>
-        {showError && <p>Já existe um usuário com esse e-mail.</p>}
-      <Link className='icon__back' to="/login" data-testid="no-account-btn">
-        <ArrowBackIcon/>
-      </Link>
       </div>
     </div>
 );

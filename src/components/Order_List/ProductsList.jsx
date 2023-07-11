@@ -2,36 +2,30 @@
 import { useState, useEffect } from 'react';
 import { Grid, TextField, Slider, Typography } from '@mui/material';
 import ProductCard from './ProductCard';
-import { getAllProducts, deleteProduct } from '../../services/Api/products';
 import classNames from "classnames";
 import { useMatch  } from 'react-router-dom';
 
 
 
-const ProductsList = ({ handleEdit, setFetchProducts }) => {
-  const [products, setProducts] = useState([]);
+const ProductsList = ({ products, handleEdit, handleDelete }) => {
   const [searchName, setSearchName] = useState('');
   const [priceRange, setPriceRange] = useState([0, 100]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(100);
 
+
+
   const isOnAdmin = useMatch({
     path: '/admin/products',
   });
+  
 
   useEffect(() => {
-    getAllProducts().then((r) => { 
-      setProducts(r);
-      setFilteredProducts(r);
-      setMinPrice(Math.min(...r.map((product) => product.price)));
-      setMaxPrice(Math.max(...r.map((product) => product.price)));
-    });
-  }, []);
-
-  const handleDelete = async (id) => {
-    await deleteProduct(id).then(() => setFetchProducts('idle'));
-  };
+        setFilteredProducts(products);
+        setMinPrice(Math.min(...products.map((product) => product.price)));
+        setMaxPrice(Math.max(...products.map((product) => product.price)));
+  }, [products]);
 
   const handleNameSearch = (event) => {
     const name = event.target.value.toLowerCase();
@@ -45,14 +39,14 @@ const ProductsList = ({ handleEdit, setFetchProducts }) => {
   };
 
   const filterProducts = (name, range) => {
-    const [minPrice, maxPrice] = range;
-    const filtered = products.filter((product) => {
-      const nameMatch = product.name.toLowerCase().includes(name);
-      const priceMatch = product.price >= minPrice && product.price <= maxPrice;
-      return nameMatch && priceMatch;
-    });
-    setFilteredProducts(filtered);
-  };
+      const [minPrice, maxPrice] = range;
+      const filtered = products.filter((product) => {
+        const nameMatch = product.name.toLowerCase().includes(name);
+        const priceMatch = product.price >= minPrice && product.price <= maxPrice;
+        return nameMatch && priceMatch;
+      });
+      setFilteredProducts(filtered);
+    };
 
   return (
     <div>

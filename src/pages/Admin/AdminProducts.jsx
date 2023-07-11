@@ -2,14 +2,15 @@ import {useEffect, useState} from 'react';
 import HeaderAdmin from '../../components/Header/HeaderAdmin';
 import ProductsList from '../../components/Order_List/ProductsList';
 import ProductForm from '../../components/Admin/AdminProductForm';
-import { getAllProducts} from '../../services/Api/products';
+import { getAllProducts, deleteProduct} from '../../services/Api/products';
 
 const AdminProducts = () => {
   const [fetchProducs, setFetchProducts] = useState('idle');
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState();
   const [isEditing, setIsEditing] = useState(false);
-
+  console.log("🚀 ~ file: AdminProducts.jsx:9 ~ AdminProducts ~ fetchProducs:", fetchProducs)
+  
   useEffect(() => {
     if (fetchProducs === 'idle') {
       setFetchProducts('pending')
@@ -26,6 +27,10 @@ const AdminProducts = () => {
     setProduct(product)
   };
 
+  const handleDelete = async (id) => {
+    await deleteProduct(id).then(() => setFetchProducts('idle'));
+  };
+
   return (
     <div>
       <HeaderAdmin />
@@ -37,7 +42,7 @@ const AdminProducts = () => {
           setFetchProducts={setFetchProducts}/>
         {products && 
           <div className="admin-products-list">
-            <ProductsList handleEdit={handleEdit} setFetchProducts={setFetchProducts} />
+            <ProductsList products={products} handleEdit={handleEdit} handleDelete={handleDelete} />
           </div>
         }
       </div>

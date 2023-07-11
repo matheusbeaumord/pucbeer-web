@@ -55,7 +55,7 @@ const AdminProductForm = ({
       <div style={{ display: 'flex', flexDirection: 'row', gap: '5%', marginBottom: '10px' }} >
         <TextField
           id="name"
-          label="Nome"
+          label={`Nome: ${isEditing ? editingProduct.name : ''}`}
           placeholder={isEditing && editingProduct.name}
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -67,7 +67,7 @@ const AdminProductForm = ({
 
         <TextField
           id="price"
-          label="Preço"
+          label={`Preço: ${isEditing ? editingProduct.name : ''}`}
           placeholder={isEditing && editingProduct.price}
           value={price}
           onChange={(e) => setPrice(e.target.value)}

@@ -100,7 +100,7 @@ const OrdersList = () => {
         <div style={{ minWidth: '300px', textAlign: 'center' }}>
           <Typography>Faixa de preço</Typography>
           <Slider
-            aria-label="Always visible"
+            // aria-label="Always visible"
             value={priceRange}
             valueLabelDisplay="auto"
             min={minPrice}

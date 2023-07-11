@@ -73,7 +73,7 @@ const ProductsList = ({ products, handleEdit, handleDelete }) => {
             Faixa de preço
             </Typography>
             <Slider
-            aria-label="Always visible"
+            // aria-label="Always visible"
             value={priceRange}
             valueLabelDisplay="auto"
             min={minPrice}

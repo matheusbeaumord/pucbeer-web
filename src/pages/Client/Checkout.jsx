@@ -36,8 +36,8 @@ const Checkout = () => {
 
   const accPrice = (price) => parseFloat(price).toFixed(2).toString().replace('.', ',');
 
-  const backToProducts = () => {
-    navigateTo('/products'),
+  const goToOrders = () => {
+    navigateTo('/orders'),
     setCart('')
   };
   const timeToGoToProducts = 2000;
@@ -73,7 +73,7 @@ const Checkout = () => {
     } catch (error) {
       toast.error(error)
     }
-    setTimeout(backToProducts, timeToGoToProducts);
+    setTimeout(goToOrders, timeToGoToProducts);
   };
 
   const disableRule = () => {

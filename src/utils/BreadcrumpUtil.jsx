@@ -20,7 +20,9 @@ export default function BasicBreadcrumbs() {
 
   return (
     <div>
-      <Breadcrumbs aria-label="breadcrumb" style={{
+      <Breadcrumbs 
+      // aria-label="breadcrumb" 
+      style={{
         fontSize: '24px', fontWeight: 'bold', padding: '1%'
         }}>
         <Link underline="hover" color="inherit">
